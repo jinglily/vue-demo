@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    #app{
+      border: 1px solid #555;
+      width:600px;
+      margin: 0 auto;
+      border-radius: 10px;
+      padding:30px 0;
+    }
+    .top{
+      width: 300px;
+      margin: 0 auto;
+    }
+    .top button{
+      background: #0099CC;
+      width:230px;
+      padding: 5px 20px;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      margin-top: 10px;
+      cursor:pointer;
+    }
+    table{
+      width: 100%;
+      text-align: center;
+      margin-top: 50px;
+    }
+    table button{
+      background: #0099CC;
+      padding: 5px 20px;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      margin-top: 10px;
+      cursor:pointer;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="top">
+        <div>
+          姓名：<input type="text" v-model="newPerson.name">
+        </div>
+        <div>
+          年龄：<input type="text" v-model="newPerson.age">
+        </div>
+        <div>
+          性别：
+          <select v-model="newPerson.sex">
+            <option value="男">男</option>
+            <option value="女">女</option>
+          </select>
+        </div>
+        <button type="button" name="button" v-on:click="add">提交</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>删除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, $index) in person">
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.sex}}</td>
+            <td><button type="button" name="button" v-on:click="deleat($index)">删除</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script src="vue.js"></script>
+  <script type="text/javascript">
+  var exampleData = {
+    person:[{
+      name:"aaa",
+      age:"22",
+      sex:"男"
+    },
+    {
+      name:"bbb",
+      age:"22",
+      sex:"女"
+    },
+    {
+      name:"ccc",
+      age:"22",
+      sex:"男"
+    }],
+    newPerson:{
+      name:'',
+      age:'0',
+      sex:'男'
+    }
+  }
+  var fun = {
+    add:function () {
+      this.person.push(this.newPerson);
+      this.newPerson = {name:'',age:'',sex:'男'}
+    },
+    deleat:function (index) {
+      this.person.splice(index,1)
+    }
+  }
+    new Vue ({
+      el:"#app",
+      data:exampleData,
+      methods:fun
+    })
+  </script>
+</html>
